@@ -1,17 +1,35 @@
 import ballerina/http;
+import ballerina/io;
 
-# A service representing a network-accessible API
-# bound to port `9090`.
-service / on new http:Listener(9090) {
+// Define the data type for Item
+type Item record {
+    int id;
+    string name;
+    decimal price;
+};
 
-    # A resource for generating greetings
-    # + name - the input string name
-    # + return - string name with hello message or error
-    resource function get greeting(string name) returns string|error {
-        // Send a response back to the caller.
-        if name is "" {
-            return error("name should not be empty!");
-        }
-        return "Hello, " + name;
-    }
+// Define some sample items
+Item[] items = [
+    {id: 1, name: "Apple", price: 0.99},
+    {id: 2, name: "Banana", price: 1.50},
+    {id: 3, name: "Orange", price: 1.25}
+];
+
+// Define the endpoint for listing items
+endpoint http:Listener listener {
+    port: 8080
+};
+
+// Define the resource for listing all items
+@http:ResourceConfig {
+    methods: ["GET"],
+    path: "/items"
+}
+function listItems(http:Caller caller, http:Request request) {
+    // Return the HTTP response with the list of items
+    http:Response response = new;
+    response.statusCode = 200;
+    response.setHeader("Content-Type", "application/json");
+    response.setJsonPayload(items);
+    _ = caller->respond(response);
 }
