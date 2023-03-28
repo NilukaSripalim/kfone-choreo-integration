@@ -11,13 +11,13 @@ service / on new http:Listener(9090) {
         return orders;
     }
     
-    resource function put orders/[string id](@http:Payload Order newOrder) returns json[]|error {
+    resource function put orders/[int id](@http:Payload Order newOrder) returns json[]|error {
         json newOrderJson = newOrder;
         ordersList.push(newOrderJson);
         return ordersList;
     }
 
-    resource function delete orders/[string id]() returns Order|error? {
+    resource function delete orders/[int id]() returns Order|error? {
         foreach json item in ordersList {
             if (item.ID == id) {
                 json removed = ordersList.remove(<int>'array:indexOf(ordersList, item));
@@ -27,7 +27,7 @@ service / on new http:Listener(9090) {
         }   
     }
 
-    resource function get orders/[string id]() returns Order|error? {
+    resource function get orders/[int id]() returns Order|error? {
         foreach json item in ordersList {
             if (item.ID == id) {
                 json orderDetail = ordersList[<int>'array:indexOf(ordersList, item)];
