@@ -10,9 +10,9 @@ type Item record {
 
 // Define some sample items
 Item[] items = [
-    {id: 1, name: "Apple", price: 0.99},
-    {id: 2, name: "Banana", price: 1.50},
-    {id: 3, name: "Orange", price: 1.25}
+    {id: 1, name: "Apple 14 ProMax", price: 0.99},
+    {id: 2, name: "Apple 11 ProMax", price: 1.50},
+    {id: 3, name: "Samsung Galaexy", price: 1.25}
 ];
 
 // Define the endpoint for listing items
