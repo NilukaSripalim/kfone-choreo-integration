@@ -11,15 +11,15 @@ service / on new http:Listener(9090) {
         return orders;
     }
     
-    resource function put orders/[string name](@http:Payload Order newOrder) returns json[]|error {
+    resource function put orders/[string id](@http:Payload Order newOrder) returns json[]|error {
         json newOrderJson = newOrder;
         ordersList.push(newOrderJson);
         return ordersList;
     }
 
-    resource function delete orders/[string name]() returns Order|error? {
+    resource function delete orders/[string id]() returns Order|error? {
         foreach json item in ordersList {
-            if (item.Name == name) {
+            if (item.ID == id) {
                 json removed = ordersList.remove(<int>'array:indexOf(ordersList, item));
                 return removed.cloneWithType(Order);
             }
@@ -27,9 +27,9 @@ service / on new http:Listener(9090) {
         }   
     }
 
-    resource function get orders/[string name]() returns Order|error? {
+    resource function get orders/[string id]() returns Order|error? {
         foreach json item in ordersList {
-            if (item.Name == name) {
+            if (item.ID == id) {
                 json orderDetail = ordersList[<int>'array:indexOf(ordersList, item)];
                 return orderDetail.cloneWithType(Order);
             }  
@@ -38,6 +38,7 @@ service / on new http:Listener(9090) {
 }
 
 public type Order record {|
+    int ID,
     string Name;
     int Price;
     string Description;
@@ -48,6 +49,8 @@ public json[] ordersList = [
 
     {
 
+        "ID": 1,
+        
         "Name": "Apple iPhone 13",
 
         "Price": 799,
@@ -60,6 +63,8 @@ public json[] ordersList = [
 
     {
 
+        "ID": 2,
+        
         "Name": "Samsung Galaxy S21 Ultra",
 
         "Price": 1199,
@@ -71,7 +76,9 @@ public json[] ordersList = [
     },
 
     {
-
+        
+        "ID": 3,
+        
         "Name": "Google Pixel 6 Pro",
 
         "Price": 899,
@@ -84,6 +91,8 @@ public json[] ordersList = [
 
     {
 
+        "ID": 4,
+        
         "Name": "iPad Pro (2021)",
 
         "Price": 799,
@@ -96,6 +105,8 @@ public json[] ordersList = [
 
     {
 
+        "ID": 5,
+        
         "Name": "Microsoft Surface Duo 2",
 
         "Price": 1499,
@@ -107,7 +118,9 @@ public json[] ordersList = [
     },
 
     {
-
+        
+        "ID": 6,
+        
         "Name": "Samsung Galaxy Watch 4",
 
         "Price": 249,
@@ -119,6 +132,8 @@ public json[] ordersList = [
     },
 
     {
+
+        "ID": 7,
 
         "Name": "Fitbit Charge 5",
 
