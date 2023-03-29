@@ -85,8 +85,7 @@ public json[] ordersList = [
 
         "Manufacturer": "Google",
         
-        "ProductImage": "https://www.att.com/idpassets/global/devices/phones/google/google-pixel-6-pro/Gallery/Cloudy-White/6074D-6.jpg
-"
+        "ProductImage": "https://www.att.com/idpassets/global/devices/phones/google/google-pixel-6-pro/Gallery/Cloudy-White/6074D-6.jpg"
 
     },
 
