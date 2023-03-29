@@ -42,7 +42,7 @@ public type Order record {|
     int Price;
     string Description;
     string Manufacturer;
-    sring ProductImage;
+    string ProductImage;
 |};
 
 public json[] ordersList = [
